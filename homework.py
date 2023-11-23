@@ -24,7 +24,6 @@ class InfoMessage:
 
     def get_message(self) -> str:
         as_dict: dict = asdict(self)
-        print(as_dict)
         formatted_message: str = self.DEFAULT_MESSAGE.format(**as_dict)
         return formatted_message
 
