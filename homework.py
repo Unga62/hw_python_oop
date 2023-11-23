@@ -1,4 +1,4 @@
-from dataclasses import dataclass, astuple
+from dataclasses import dataclass, asdict
 
 
 @dataclass
@@ -16,15 +16,16 @@ class InfoMessage:
     distance: float
     speed: float
     calories: float
-    DEFAULT_MESSAGE = ('Тип тренировки: {}; Длительность: {:1.3f} ч.; '
-                       'Дистанция: {:1.3f} км; Ср. скорость: {:1.3f} км/ч; '
-                       'Потрачено ккал: {:1.3f}.')
+    DEFAULT_MESSAGE = ('Тип тренировки: {training_type}; '
+                       'Длительность: {duration:1.3f} ч.; '
+                       'Дистанция: {distance:1.3f} км; '
+                       'Ср. скорость: {speed:1.3f} км/ч; '
+                       'Потрачено ккал: {calories:1.3f}.')
 
     def get_message(self) -> str:
-        infomessage = InfoMessage(self.training_type, self.duration,
-                                  self.distance, self.speed, self.calories)
-        data: tuple = astuple(infomessage)
-        formatted_message: str = self.DEFAULT_MESSAGE.format(*data)
+        as_dict: dict = asdict(self)
+        print(as_dict)
+        formatted_message: str = self.DEFAULT_MESSAGE.format(**as_dict)
         return formatted_message
 
 
